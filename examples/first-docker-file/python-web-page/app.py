@@ -1,2 +1,0 @@
-Name  = "Prajwal"
-print (Name);
