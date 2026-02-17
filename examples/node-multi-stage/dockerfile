@@ -4,13 +4,12 @@ WORKDIR /app
 
 # Copy package files and install dependencies
 COPY package*.json ./
-RUN npm install
+
 
 # Copy source code
 COPY . .
 
 # Run build step (if you have frontend assets or transpilation)
-RUN npm run build
 
 # Stage 2: Runtime
 FROM node:20-slim
@@ -18,11 +17,12 @@ WORKDIR /app
 
 # Copy only production dependencies
 COPY package*.json ./
-RUN npm install --only=production
+
 
 # Copy built files and source code from builder
 COPY --from=builder /app ./
 
 # Expose port and run app
 EXPOSE 3000
-CMD ["npm", "start"]
+
+CMD ["npm", "run"]
